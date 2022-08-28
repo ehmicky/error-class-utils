@@ -43,3 +43,29 @@ each(
 test('Polyfilled error can be subclassed', (t) => {
   t.true(childError instanceof ChildError)
 })
+
+const invalidNewTarget = function () {}
+// eslint-disable-next-line fp/no-mutation
+invalidNewTarget.prototype = { constructor: true }
+
+test('Handles invalid prototype.constructor', (t) => {
+  const error = new Error('test')
+  error.constructor = Error
+  ensureCorrectClass(error, invalidNewTarget)
+  t.is(error.constructor, Error)
+})
+
+each(
+  [
+    [{}, Error],
+    [childError],
+    // eslint-disable-next-line unicorn/no-null
+    [childError, null],
+    [childError, () => {}],
+  ],
+  ({ title }, args) => {
+    test(`Validate the arguments | ${title}`, (t) => {
+      t.throws(ensureCorrectClass.bind(undefined, ...args))
+    })
+  },
+)

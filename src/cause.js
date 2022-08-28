@@ -1,8 +1,11 @@
 import { isObject } from './is_object.js'
 import { setNonEnumProp } from './set.js'
+import { validateError } from './validate.js'
 
 // Ponyfills `error.cause` for Node <16.9.0 and old browsers
 export const ponyfillCause = function (error, parameters) {
+  validateError(error)
+
   if (
     hasCause(parameters) &&
     !('cause' in error && parameters.cause === error.cause)

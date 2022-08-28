@@ -23,3 +23,7 @@ each([undefined, null, {}], ({ title }, parameters) => {
     t.false('cause' in error)
   })
 })
+
+test('Validate the first argument', (t) => {
+  t.throws(ponyfillCause.bind(undefined, {}))
+})
