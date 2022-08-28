@@ -10,6 +10,16 @@ Useful utilities when creating custom error classes.
 
 # Features
 
+- Ponyfills
+  [`error.cause`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause)
+  on
+  [older Node.js and browsers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause#browser_compatibility).
+- Prevents [prototype pollution](#sanitizepropertiesproperties) when setting
+  error properties
+- Properly [set `error.name`](#seterrornameerrorclass-name)
+- Fix [issues](#ensurecorrectclasserror-newtarget) when `Error` has been
+  polyfilled
+
 # Example
 
 <!-- eslint-disable fp/no-this, fp/no-class, fp/no-mutating-assign -->
