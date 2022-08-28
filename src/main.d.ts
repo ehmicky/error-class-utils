@@ -29,7 +29,7 @@ export interface ErrorParams {
  */
 export function sanitizeProperties<
   ErrorParamsArg extends ErrorParams = ErrorParams,
->(props?: ErrorParamsArg): ErrorParamsArg
+>(properties?: ErrorParamsArg): ErrorParamsArg
 
 /**
  * Error class name
