@@ -49,7 +49,7 @@ export class CustomError extends Error {
 }
 
 // Properly set `error.name` as a non-enumerable and inherited property
-setErrorName(CustomError, name)
+setErrorName(CustomError, 'CustomError')
 ```
 
 ```js
@@ -62,7 +62,7 @@ const error = new CustomError('message', {
 })
 console.log(error instanceof CustomError) // true
 console.log(error.name) // 'CustomError'
-console.log(error.cause) // Error: causeMessage ...
+console.log(error.cause) // Error: innerMessage ...
 console.log(error.example) // true
 ```
 
@@ -98,7 +98,7 @@ This must be called directly inside a class constructor, after
 ```js
 import { ensureCorrectClass } from 'error-class-utils'
 
-export class CustomError extends Error {
+class CustomError extends Error {
   constructor(message, parameters) {
     super(message, parameters)
     ensureCorrectClass(this, new.target)
@@ -107,7 +107,7 @@ export class CustomError extends Error {
 
 // Thanks to `ensureCorrectClass()`, this is now always true even when
 // `Error` has been polyfilled
-console.log(new CustomError('message') instanceof CustomError)
+console.log(new CustomError('message') instanceof CustomError) // true
 ```
 
 ## ponyfillCause(error, parameters?)
@@ -159,10 +159,6 @@ copy of `properties` is returned excluding any property that:
   [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/toString))
 - Is
   [non-enumerable or inherited](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
-- Throws when being retrieved, due to invalid
-  [getters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get)
-  or
-  [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
 <!-- eslint-disable fp/no-class, fp/no-this, fp/no-get-set, fp/no-mutating-assign -->
 
@@ -181,14 +177,11 @@ const error = new CustomError('message', {
     example: true,
     message: 'ignoredMessage',
     toString: () => 'prototypePollution',
-    get unsafeProperty() {
-      throw new Error('unsafe property')
-    },
   },
 })
 console.log(error.example) // true
 console.log(error.message) // 'message'
-console.log(error.toString()) // 'CustomError: message'
+console.log(error.toString()) // not 'prototypePollution'
 ```
 
 ## setErrorName(ErrorClass, name)
@@ -223,7 +216,7 @@ setErrorName(CustomError, 'CustomError')
 console.log(CustomError.name) // 'CustomError'
 console.log(CustomError.prototype.name) // 'CustomError'
 
-const error = new Error('test')
+const error = new CustomError('message')
 console.log(error.name) // 'CustomError'
 console.log(Object.keys(error).includes('name')) // false
 ```
