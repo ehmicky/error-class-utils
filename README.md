@@ -6,7 +6,7 @@
 
 Properly create error classes.
 
-Work in progress!
+Set of utilities that are useful when creating custom error classes.
 
 # Features
 
