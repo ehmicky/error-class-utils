@@ -1,7 +1,10 @@
 /**
- * `error-class-utils` options
+ *
+ * @example
+ * ```js
+ * ```
  */
-export interface Options {}
+export function ponyfillCause(error: Error, parameters?: unknown): void
 
 /**
  *
@@ -9,4 +12,34 @@ export interface Options {}
  * ```js
  * ```
  */
-export default function errorClassUtils(value: any, options?: Options): object
+export function ensureCorrectClass(error: Error, newTarget: Function): void
+
+/**
+ * Parameters passed to `new CustomError('message', params)`
+ */
+export interface ErrorParams {
+  [param: string | symbol]: unknown
+}
+
+/**
+ *
+ * @example
+ * ```js
+ * ```
+ */
+export function sanitizeProperties<
+  ErrorParamsArg extends ErrorParams = ErrorParams,
+>(props?: ErrorParamsArg): ErrorParamsArg
+
+/**
+ * Error class name
+ */
+export type ErrorName = `${string}Error`
+
+/**
+ *
+ * @example
+ * ```js
+ * ```
+ */
+export function setErrorName(ErrorClass: Function, name: ErrorName): void

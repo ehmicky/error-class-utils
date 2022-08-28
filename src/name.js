@@ -3,10 +3,10 @@ import { setNonEnumProp } from './set.js'
 // To mimic native error classes and to print correctly with `util.inspect()`:
 //  - `error.name` should be assigned on the prototype, not on the instance
 //  - the constructor `name` must be set too
-export const setErrorName = function (CustomErrorClass, name) {
+export const setErrorName = function (ErrorClass, name) {
   validateErrorName(name)
-  setNonEnumProp(CustomErrorClass, 'name', name)
-  setNonEnumProp(CustomErrorClass.prototype, 'name', name)
+  setNonEnumProp(ErrorClass, 'name', name)
+  setNonEnumProp(ErrorClass.prototype, 'name', name)
 }
 
 // Validate `error.name` looks like `ExampleError` for consistency with
