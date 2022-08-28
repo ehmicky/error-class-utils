@@ -61,42 +61,6 @@ export interface ErrorParams {
 }
 
 /**
- * Sanitize a `properties` object meant to be set as error properties.
- * A shallow copy of `properties` is returned excluding any property that:
- *
- *  - Overrides core error properties (like
- *    [`message`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message))
- *  - Pollutes prototype (like
- *    [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/toString))
- *  - Is
- *    [non-enumerable or inherited](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
- *
- * @example
- * ```js
- * class CustomError extends Error {
- *   constructor(message, parameters) {
- *     super(message, parameters)
- *     Object.assign(this, sanitizeProperties(parameters?.props))
- *   }
- * }
- *
- * const error = new CustomError('message', {
- *   props: {
- *     example: true,
- *     message: 'ignoredMessage',
- *     toString: () => 'prototypePollution',
- *   },
- * })
- * console.log(error.example) // true
- * console.log(error.message) // 'message'
- * console.log(error.toString()) // not 'prototypePollution'
- * ```
- */
-export function sanitizeProperties<
-  ErrorParamsArg extends ErrorParams = ErrorParams,
->(properties?: ErrorParamsArg): ErrorParamsArg
-
-/**
  * Error class name
  */
 export type ErrorName = `${string}Error`

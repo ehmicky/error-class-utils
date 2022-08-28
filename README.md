@@ -14,8 +14,6 @@ Useful utilities when creating custom error classes.
   [`error.cause`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause)
   on
   [older Node.js and browsers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause#browser_compatibility)
-- Prevent [prototype pollution](#sanitizepropertiesproperties) when setting
-  error properties
 - Properly [set `error.name`](#seterrornameerrorclass-name)
 - Fix [issues](#ensurecorrectclasserror-newtarget) when `Error` has been
   polyfilled
@@ -29,7 +27,6 @@ import {
   ensureCorrectClass,
   ponyfillCause,
   setErrorName,
-  sanitizeProperties,
 } from 'error-class-utils'
 
 export class CustomError extends Error {
@@ -41,10 +38,6 @@ export class CustomError extends Error {
 
     // Ponyfill `error.cause` on old Node.js/browsers
     ponyfillCause(this, parameters)
-
-    // Prevent prototype pollution when setting error properties
-    const props = sanitizeProperties(parameters?.props)
-    Object.assign(this, props)
   }
 }
 
@@ -143,45 +136,6 @@ try {
   const error = new CustomError('message', { cause })
   console.log(error.cause.message) // 'innerMessage'
 }
-```
-
-## sanitizeProperties(properties?)
-
-`properties` `ErrorParams?`\
-_Return value_: `ErrorParams`
-
-Sanitize a `properties` object meant to be set as error properties. A shallow
-copy of `properties` is returned excluding any property that:
-
-- Overrides core error properties (like
-  [`message`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message))
-- Pollutes prototype (like
-  [`toString()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/toString))
-- Is
-  [non-enumerable or inherited](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
-
-<!-- eslint-disable fp/no-class, fp/no-this, fp/no-get-set, fp/no-mutating-assign -->
-
-```js
-import { sanitizeProperties } from 'error-class-utils'
-
-class CustomError extends Error {
-  constructor(message, parameters) {
-    super(message, parameters)
-    Object.assign(this, sanitizeProperties(parameters?.props))
-  }
-}
-
-const error = new CustomError('message', {
-  props: {
-    example: true,
-    message: 'ignoredMessage',
-    toString: () => 'prototypePollution',
-  },
-})
-console.log(error.example) // true
-console.log(error.message) // 'message'
-console.log(error.toString()) // not 'prototypePollution'
 ```
 
 ## setErrorName(ErrorClass, name)
