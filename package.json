@@ -45,9 +45,11 @@
     "lib": "src",
     "test": "test"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^1.0.86"
+    "@ehmicky/dev-tasks": "^1.0.86",
+    "error-cause": "^1.0.4",
+    "error-cause-polyfill": "^1.1.0",
+    "test-each": "^5.4.0"
   },
   "engines": {
     "node": ">=14.18.0"
