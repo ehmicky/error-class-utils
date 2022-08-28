@@ -10,8 +10,8 @@ import { validateError } from './validate.js'
 // A common library that does this is `error-cause` which polyfills
 // `error.cause`.
 // We fix this by detecting such situation and re-setting the prototype.
-// We use `new.target` so that this works even if `CustomErrorClass` is
-// subclassed itself.
+// We use `new.target` so that this works even if the error class is subclassed
+// itself.
 export const ensureCorrectClass = function (error, newTarget) {
   validateError(error)
   validateNewTarget(newTarget)
