@@ -1,6 +1,6 @@
 import test from 'ava'
-import templateName from 'template-name'
+import errorClassUtils from 'error-class-utils'
 
 test('Dummy test', (t) => {
-  t.true(templateName(true))
+  t.true(errorClassUtils(true))
 })
