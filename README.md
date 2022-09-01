@@ -6,13 +6,13 @@
 
 Properly create error classes.
 
-Set of utilities that are useful when creating custom error classes.
+Useful utilities when creating custom error classes.
 
 # Features
 
 # Example
 
-<!-- eslint-disable fp/no-this, fp/no-class -->
+<!-- eslint-disable fp/no-this, fp/no-class, fp/no-mutating-assign -->
 
 ```js
 import {
@@ -25,13 +25,16 @@ import {
 export class CustomError extends Error {
   constructor(message, parameters) {
     super(message, parameters)
+    // Fix some issues when `Error` has been polyfilled
     ensureCorrectClass(this, new.target)
+    // Ponyfills `error.cause` on old Node.js/browsers
     ponyfillCause(this, parameters)
+    // Prevent prototype pollution when setting error properties
     const props = sanitizeProperties(parameters?.props)
-    // eslint-disable-next-line fp/no-mutating-assign
     Object.assign(this, props)
   }
 }
+// Properly set `error.name`
 setErrorName(CustomError, name)
 ```
 
@@ -147,7 +150,7 @@ Sanitize a `properties` object meant to be set as error properties. A copy of
   or
   [`Proxy`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
 
-<!-- eslint-disable fp/no-class, fp/no-this, fp/no-get-set -->
+<!-- eslint-disable fp/no-class, fp/no-this, fp/no-get-set, fp/no-mutating-assign -->
 
 ```js
 import { sanitizeProperties } from 'error-class-utils'
@@ -155,7 +158,6 @@ import { sanitizeProperties } from 'error-class-utils'
 class CustomError extends Error {
   constructor(message, parameters) {
     super(message, parameters)
-    // eslint-disable-next-line fp/no-mutating-assign
     Object.assign(this, sanitizeProperties(parameters?.props))
   }
 }
