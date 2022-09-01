@@ -25,16 +25,20 @@ import {
 export class CustomError extends Error {
   constructor(message, parameters) {
     super(message, parameters)
+
     // Fix some issues when `Error` has been polyfilled
     ensureCorrectClass(this, new.target)
+
     // Ponyfills `error.cause` on old Node.js/browsers
     ponyfillCause(this, parameters)
+
     // Prevent prototype pollution when setting error properties
     const props = sanitizeProperties(parameters?.props)
     Object.assign(this, props)
   }
 }
-// Properly set `error.name`
+
+// Properly set `error.name` as a non-enumerable and inherited property
 setErrorName(CustomError, name)
 ```
 
