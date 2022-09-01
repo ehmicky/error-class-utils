@@ -29,7 +29,7 @@ export class CustomError extends Error {
     // Fix some issues when `Error` has been polyfilled
     ensureCorrectClass(this, new.target)
 
-    // Ponyfills `error.cause` on old Node.js/browsers
+    // Ponyfill `error.cause` on old Node.js/browsers
     ponyfillCause(this, parameters)
 
     // Prevent prototype pollution when setting error properties
@@ -45,8 +45,8 @@ setErrorName(CustomError, name)
 ```js
 import { CustomError } from './errors.js'
 
-const cause = new Error('causeMessage')
-const error = new CustomError('exampleMessage', {
+const cause = new Error('innerMessage')
+const error = new CustomError('message', {
   cause,
   props: { example: true },
 })
@@ -97,7 +97,7 @@ export class CustomError extends Error {
 
 // Thanks to `ensureCorrectClass()`, this is now always true even when
 // `Error` has been polyfilled
-console.log(new CustomError('message', { cause }) instanceof CustomError)
+console.log(new CustomError('message') instanceof CustomError)
 ```
 
 ## ponyfillCause(error, parameters?)
@@ -166,7 +166,7 @@ class CustomError extends Error {
   }
 }
 
-const error = new CustomError('exampleMessage', {
+const error = new CustomError('message', {
   props: {
     example: true,
     message: 'ignoredMessage',
@@ -177,8 +177,8 @@ const error = new CustomError('exampleMessage', {
   },
 })
 console.log(error.example) // true
-console.log(error.message) // 'exampleMessage'
-console.log(error.toString()) // 'CustomError: exampleMessage'
+console.log(error.message) // 'message'
+console.log(error.toString()) // 'CustomError: message'
 ```
 
 ## setErrorName(ErrorClass, name)
@@ -190,16 +190,16 @@ _Return value_: `void`
 Set an `ErrorClass`'s
 [`name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/name).
 
-This must be performed on an error class, not instance. Unlike using `this.name`
-inside an error's constructor, this follows the pattern used by the native
-`Error` classes where `error.name` should:
+This must be performed on an error class, not instance. Unlike setting
+`this.name = '...'` inside an error's constructor, this follows the native
+`Error` classes' pattern where `error.name`:
 
-- End with the `Error` suffix
-- Match the
+- Ends with the `Error` suffix
+- Matches the
   [constructor's `name`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/name)
-- Be
+- Is
   [inherited](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
-- Be
+- Is
   [non-enumerable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Enumerability_and_ownership_of_properties)
 
 <!-- eslint-disable fp/no-class -->
