@@ -10,11 +10,11 @@ Useful utilities when creating custom error classes.
 
 # Features
 
-- Ponyfills
+- Ponyfill
   [`error.cause`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause)
   on
-  [older Node.js and browsers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause#browser_compatibility).
-- Prevents [prototype pollution](#sanitizepropertiesproperties) when setting
+  [older Node.js and browsers](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause#browser_compatibility)
+- Prevent [prototype pollution](#sanitizepropertiesproperties) when setting
   error properties
 - Properly [set `error.name`](#seterrornameerrorclass-name)
 - Fix [issues](#ensurecorrectclasserror-newtarget) when `Error` has been
@@ -150,8 +150,8 @@ try {
 `properties` `ErrorParams?`\
 _Return value_: `ErrorParams`
 
-Sanitize a `properties` object meant to be set as error properties. A copy of
-`properties` is returned excluding any property that:
+Sanitize a `properties` object meant to be set as error properties. A shallow
+copy of `properties` is returned excluding any property that:
 
 - Overrides core error properties (like
   [`message`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message))
