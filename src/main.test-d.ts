@@ -1,16 +1,6 @@
-import {
-  expectType,
-  expectError,
-  expectAssignable,
-  expectNotAssignable,
-} from 'tsd'
+import { expectType, expectError } from 'tsd'
 
-import {
-  ponyfillCause,
-  ensureCorrectClass,
-  ErrorParams,
-  setErrorName,
-} from './main.js'
+import { ponyfillCause, ensureCorrectClass, setErrorName } from './main.js'
 
 const error = new Error('test')
 

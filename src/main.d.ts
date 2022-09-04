@@ -54,13 +54,6 @@ export function ensureCorrectClass(error: Error, newTarget: Function): void
 export function ponyfillCause(error: Error, parameters?: unknown): void
 
 /**
- * Parameters passed to `new CustomError('message', params)`
- */
-export interface ErrorParams {
-  [param: string | symbol]: unknown
-}
-
-/**
  * Error class name
  */
 export type ErrorName = `${string}Error`
