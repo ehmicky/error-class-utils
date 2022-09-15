@@ -179,8 +179,6 @@ console.log(Object.keys(error).includes('name')) // false
 
 - [`modern-errors`](https://github.com/ehmicky/modern-errors): Handle errors
   like it's 2022 🔮
-- [`modern-errors-plugins`](https://github.com/ehmicky/modern-errors-plugins):
-  Plugins for `modern-errors`
 - [`error-custom-class`](https://github.com/ehmicky/error-custom-class): Create
   one error class
 - [`error-serializer`](https://github.com/ehmicky/error-serializer): Convert
