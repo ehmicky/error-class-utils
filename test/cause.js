@@ -15,7 +15,6 @@ each(['causeTest', undefined], ({ title }, cause) => {
   })
 })
 
-// eslint-disable-next-line unicorn/no-null
 each([undefined, null, {}], ({ title }, parameters) => {
   test(`Does not set error.cause by default | ${title}`, (t) => {
     const error = new Error('test')

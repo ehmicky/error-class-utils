@@ -56,13 +56,7 @@ test('Handles invalid prototype.constructor', (t) => {
 })
 
 each(
-  [
-    [{}, Error],
-    [childError],
-    // eslint-disable-next-line unicorn/no-null
-    [childError, null],
-    [childError, () => {}],
-  ],
+  [[{}, Error], [childError], [childError, null], [childError, () => {}]],
   ({ title }, args) => {
     test(`Validate the arguments | ${title}`, (t) => {
       t.throws(ensureCorrectClass.bind(undefined, ...args))
