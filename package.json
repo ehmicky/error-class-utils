@@ -34,7 +34,7 @@
     "stacktrace",
     "typescript"
   ],
-  "license": "Apache-2.0",
+  "license": "MIT",
   "homepage": "https://www.github.com/ehmicky/error-class-utils",
   "repository": "ehmicky/error-class-utils",
   "bugs": {
