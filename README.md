@@ -50,14 +50,10 @@ setErrorName(CustomError, 'CustomError')
 import { CustomError } from './errors.js'
 
 const cause = new Error('innerMessage')
-const error = new CustomError('message', {
-  cause,
-  props: { example: true },
-})
+const error = new CustomError('message', { cause })
 console.log(error instanceof CustomError) // true
 console.log(error.name) // 'CustomError'
 console.log(error.cause) // Error: innerMessage ...
-console.log(error.example) // true
 ```
 
 # Install
