@@ -1,6 +1,6 @@
 import { expectType, expectError } from 'tsd'
 
-import { ponyfillCause, ensureCorrectClass, setErrorName } from './main.js'
+import { ponyfillCause, ensureCorrectClass, setErrorName } from 'error-class-utils'
 
 const error = new Error('test')
 
