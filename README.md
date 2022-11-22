@@ -205,6 +205,8 @@ console.log(Object.keys(error).includes('name')) // false
   handler for CLI applications 💥
 - [`log-process-errors`](https://github.com/ehmicky/log-process-errors): Show
   some ❤ to Node.js process errors
+- [`error-http-response`](https://github.com/ehmicky/error-http-response):
+  Create HTTP error responses
 
 # Support
 
