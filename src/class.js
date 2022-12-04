@@ -1,5 +1,5 @@
-import { isObject } from '../is_object.js'
-import { validateError } from '../validate.js'
+import { isObject } from './is_object.js'
+import { validateError } from './validate.js'
 
 // If the global `Error` class was monkey-patched, it is likely to return an
 // `Error` instance.

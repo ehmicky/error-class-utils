@@ -1,5 +1,5 @@
 // eslint-disable-next-line n/file-extension-in-import, import/no-unassigned-import
-import 'error-cause-polyfill/auto'
+import 'error-cause/auto'
 
 // eslint-disable-next-line import/no-unassigned-import
-import '../helpers/class.test.js'
+import './helpers/class.test.js'
