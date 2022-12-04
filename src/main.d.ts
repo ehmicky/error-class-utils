@@ -1,3 +1,5 @@
+type ErrorConstructor = new () => Error
+
 /**
  * Some `Error` polyfills (such as
  * [`es-shims/error-cause`](https://github.com/es-shims/error-cause)) prevent
@@ -22,7 +24,10 @@
  * console.log(new CustomError('message') instanceof CustomError) // true
  * ```
  */
-export function ensureCorrectClass(error: Error, newTarget: Function): void
+export function ensureCorrectClass(
+  error: Error,
+  newTarget: ErrorConstructor,
+): void
 
 /**
  * Ponyfills
@@ -87,4 +92,8 @@ export type ErrorName = `${string}Error`
  * console.log(Object.keys(error).includes('name')) // false
  * ```
  */
-export function setErrorName(ErrorClass: Function, name: ErrorName): void
+
+export function setErrorName(
+  ErrorClass: ErrorConstructor,
+  name: ErrorName,
+): void
