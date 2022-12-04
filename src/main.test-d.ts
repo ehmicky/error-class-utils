@@ -1,4 +1,4 @@
-import { expectType, expectError } from 'tsd'
+import { expectType } from 'tsd'
 
 import {
   ponyfillCause,
@@ -11,15 +11,23 @@ const error = new Error('test')
 expectType<void>(ponyfillCause(error))
 ponyfillCause(error, {})
 ponyfillCause(error, null)
-expectError(ponyfillCause({}, {}))
+// @ts-expect-error
+ponyfillCause({}, {})
 
 expectType<void>(ensureCorrectClass(error, Error))
-expectError(ensureCorrectClass(error))
-expectError(ensureCorrectClass(error, null))
-expectError(ensureCorrectClass({}, Error))
+// @ts-expect-error
+ensureCorrectClass(error)
+// @ts-expect-error
+ensureCorrectClass(error, null)
+// @ts-expect-error
+ensureCorrectClass({}, Error)
 
 expectType<void>(setErrorName(Error, 'TestError'))
-expectError(setErrorName(Error))
-expectError(setErrorName(Error, 'Test'))
-expectError(setErrorName(Error, 'testerror'))
-expectError(setErrorName(error, 'TestError'))
+// @ts-expect-error
+setErrorName(Error)
+// @ts-expect-error
+setErrorName(Error, 'Test')
+// @ts-expect-error
+setErrorName(Error, 'testerror')
+// @ts-expect-error
+setErrorName(error, 'TestError')
