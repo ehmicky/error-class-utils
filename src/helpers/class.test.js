@@ -45,7 +45,7 @@ test('Polyfilled error can be subclassed', (t) => {
   t.true(childError instanceof ChildError)
 })
 
-const invalidNewTarget = function () {}
+const invalidNewTarget = () => {}
 // eslint-disable-next-line fp/no-mutation
 invalidNewTarget.prototype = { constructor: true }
 

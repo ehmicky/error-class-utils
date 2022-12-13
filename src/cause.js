@@ -3,7 +3,7 @@ import { setNonEnumProp } from './set.js'
 import { validateError } from './validate.js'
 
 // Ponyfills `error.cause` for Node <16.9.0 and old browsers
-export const ponyfillCause = function (error, parameters) {
+export const ponyfillCause = (error, parameters) => {
   validateError(error)
 
   if (
@@ -15,6 +15,4 @@ export const ponyfillCause = function (error, parameters) {
 }
 
 // Passing `{ cause: undefined }` creates `error.cause`, unlike passing `{}`
-const hasCause = function (parameters) {
-  return isObject(parameters) && 'cause' in parameters
-}
+const hasCause = (parameters) => isObject(parameters) && 'cause' in parameters

@@ -12,7 +12,7 @@ import { validateError } from './validate.js'
 // We fix this by detecting such situation and re-setting the prototype.
 // We use `new.target` so that this works even if the error class is subclassed
 // itself.
-export const ensureCorrectClass = function (error, newTarget) {
+export const ensureCorrectClass = (error, newTarget) => {
   validateError(error)
   validateNewTarget(newTarget)
 
@@ -32,7 +32,7 @@ export const ensureCorrectClass = function (error, newTarget) {
   }
 }
 
-const validateNewTarget = function (newTarget) {
+const validateNewTarget = (newTarget) => {
   if (newTarget === undefined) {
     throw new TypeError(
       "This must be called directly inside the class's constructor.",
