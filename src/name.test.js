@@ -1,9 +1,9 @@
 import { inspect } from 'node:util'
 
 import test from 'ava'
+import { setErrorName } from 'error-class-utils'
 import { each } from 'test-each'
 
-import { setErrorName } from 'error-class-utils'
 
 // eslint-disable-next-line fp/no-class
 class TestError extends Error {}

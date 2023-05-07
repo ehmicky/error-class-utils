@@ -1,8 +1,8 @@
 // eslint-disable-next-line ava/no-ignored-test-files
 import test from 'ava'
+import { ensureCorrectClass } from 'error-class-utils'
 import { each } from 'test-each'
 
-import { ensureCorrectClass } from 'error-class-utils'
 
 const TestError = class extends Error {
   constructor(...args) {
