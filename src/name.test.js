@@ -10,8 +10,7 @@ class TestError extends Error {}
 setErrorName(TestError, 'TestError')
 const testError = new TestError('test')
 
-const { propertyIsEnumerable: isEnum, hasOwnProperty: hasOwn } =
-  Object.prototype
+const { propertyIsEnumerable: isEnum } = Object.prototype
 
 test('Sets constructor name', (t) => {
   t.is(TestError.name, 'TestError')
@@ -26,7 +25,7 @@ test('Sets error.name', (t) => {
 })
 
 test('error.name is inherited', (t) => {
-  t.false(hasOwn.call(testError, 'name'))
+  t.false(Object.hasOwn(testError, 'name'))
 })
 
 test('error.name is not enumerable', (t) => {
