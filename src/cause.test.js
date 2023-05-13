@@ -2,7 +2,6 @@ import test from 'ava'
 import { ponyfillCause } from 'error-class-utils'
 import { each } from 'test-each'
 
-
 const { propertyIsEnumerable: isEnum } = Object.prototype
 
 each(['causeTest', undefined], ({ title }, cause) => {

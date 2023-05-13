@@ -3,7 +3,6 @@ import test from 'ava'
 import { ensureCorrectClass } from 'error-class-utils'
 import { each } from 'test-each'
 
-
 const TestError = class extends Error {
   constructor(...args) {
     super(...args)

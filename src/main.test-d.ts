@@ -5,7 +5,6 @@ import {
 } from 'error-class-utils'
 import { expectType } from 'tsd'
 
-
 const error = new Error('test')
 
 expectType<void>(ponyfillCause(error))
