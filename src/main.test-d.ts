@@ -1,9 +1,10 @@
+import { expectType } from 'tsd'
+
 import {
   ponyfillCause,
   ensureCorrectClass,
   setErrorName,
 } from 'error-class-utils'
-import { expectType } from 'tsd'
 
 const error = new Error('test')
 
