@@ -1,6 +1,7 @@
 import test from 'ava'
-import { ponyfillCause } from 'error-class-utils'
 import { each } from 'test-each'
+
+import { ponyfillCause } from 'error-class-utils'
 
 const { propertyIsEnumerable: isEnum } = Object.prototype
 
