@@ -42,7 +42,10 @@
   ],
   "license": "MIT",
   "homepage": "https://www.github.com/ehmicky/error-class-utils",
-  "repository": "ehmicky/error-class-utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehmicky/error-class-utils.git"
+  },
   "bugs": {
     "url": "https://github.com/ehmicky/error-class-utils/issues"
   },
