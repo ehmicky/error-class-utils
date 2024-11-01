@@ -19,6 +19,7 @@ export const ensureCorrectClass = (error, newTarget) => {
   const newTargetProto = newTarget.prototype
 
   if (Object.getPrototypeOf(error) !== newTargetProto) {
+    // eslint-disable-next-line fp/no-mutating-methods
     Object.setPrototypeOf(error, newTargetProto)
   }
 
