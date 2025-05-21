@@ -206,6 +206,8 @@ console.log(Object.keys(error).includes('name')) // false
   Polyfill `error.cause`
 - [`handle-cli-error`](https://github.com/ehmicky/handle-cli-error): 💣 Error
   handler for CLI applications 💥
+- [`beautiful-error`](https://github.com/ehmicky/beautiful-error): Prettify
+  error messages and stacks
 - [`log-process-errors`](https://github.com/ehmicky/log-process-errors): Show
   some ❤ to Node.js process errors
 - [`error-http-response`](https://github.com/ehmicky/error-http-response):
